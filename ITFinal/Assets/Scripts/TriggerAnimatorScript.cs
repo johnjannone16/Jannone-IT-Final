@@ -8,6 +8,8 @@ public class TriggerAnimatorScript : MonoBehaviour
     public Rigidbody player;
     public GameObject playerOBJ;
     public float speed = 1;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +39,7 @@ public class TriggerAnimatorScript : MonoBehaviour
     {
         if (ladderClimb.canClimb == true)
         {
-            if (Input.GetKey(KeyCode.Q))
+            if (Input.GetKey(KeyCode.F))
             {
                 anim.SetBool("isClimbing", true);
                 player.useGravity = false;
@@ -48,7 +50,7 @@ public class TriggerAnimatorScript : MonoBehaviour
             {
 
                 Debug.Log("Climbing");
-                if (Input.GetKey(KeyCode.W))
+                if (Input.GetKey(KeyCode.W) && ladderExit.exitLadder == false)
                 {
                     playerOBJ.transform.Translate(new Vector3(0, 1, 0) * Time.deltaTime * speed);
                     anim.SetFloat("climbSpeed", 1);
@@ -73,13 +75,18 @@ public class TriggerAnimatorScript : MonoBehaviour
                 {
                     anim.SetBool("climbExit", true);
                     anim.SetBool("isClimbing", false);
-                    Invoke("translateUp", 2);
                     
+                    
+                    playerOBJ.transform.Translate(new Vector3(0, 1, 0) * Time.deltaTime * speed);
+                    Invoke("translateUp", 2);
+                   
                 }
 
                 if (ladderExit.exitLadder == false)
                 {
                     anim.SetBool("climbExit", false);
+                    
+                    
                 }
 
             }
@@ -96,7 +103,7 @@ public class TriggerAnimatorScript : MonoBehaviour
     }
     private void translateUp()
     {
-        playerOBJ.transform.Translate(new Vector3(0, 0, 1) * Time.deltaTime * speed);
+        playerOBJ.transform.Translate(new Vector3(0, 0, 0.85f) * Time.deltaTime * speed);
         player.isKinematic = false;
         player.useGravity = true;
     }
