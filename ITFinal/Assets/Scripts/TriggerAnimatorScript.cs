@@ -99,6 +99,13 @@ public class TriggerAnimatorScript : MonoBehaviour
 
             }
 
+            if(stopper.nearGround == true && Input.GetKey(KeyCode.F) && Input.GetKey(KeyCode.S))
+            {
+                anim.SetBool("isClimbing", false);
+                player.useGravity = true;
+                player.isKinematic = false;
+            }
+
         }
     }
     private void translateUp()

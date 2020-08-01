@@ -41,6 +41,8 @@ public class ladderClimb : MonoBehaviour
 
     }
 
+ 
+
     private void OnTriggerEnter(Collider other)
     {
         ladderClimb.canClimb = false;
