@@ -28,6 +28,8 @@ public class RigidBodyEnterScript : MonoBehaviour
     {
         rend.material.color = Color.red;
         inTrigger = true;
+        Debug.Log("intrigger");
+
     }
 
     private void OnTriggerExit(Collider rb)
