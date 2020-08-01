@@ -25,7 +25,7 @@ public class TriggerAnimatorScript : MonoBehaviour
     }
     void pushTrigger()
     {
-        if (moveTrigger.inTrigger == true && Input.GetKey(KeyCode.F) == true)
+        if (moveTrigger.inTrigger == true && Input.GetKey(KeyCode.F) == true && fireflyChangeMat.abilityNum == 3)
         {
             anim.SetBool("isPushing", true);
         }
@@ -37,7 +37,7 @@ public class TriggerAnimatorScript : MonoBehaviour
 
     void ladderTrigger()
     {
-        if (ladderClimb.canClimb == true)
+        if (ladderClimb.canClimb == true && fireflyChangeMat.abilityNum == 2)
         {
             if (Input.GetKey(KeyCode.F))
             {
@@ -77,7 +77,7 @@ public class TriggerAnimatorScript : MonoBehaviour
                     anim.SetBool("isClimbing", false);
                     
                     
-                    playerOBJ.transform.Translate(new Vector3(0, 1, 0) * Time.deltaTime * speed);
+                    playerOBJ.transform.Translate(new Vector3(0, 1.5f, 0) * Time.deltaTime * speed);
                     Invoke("translateUp", 2);
                    
                 }
@@ -110,7 +110,7 @@ public class TriggerAnimatorScript : MonoBehaviour
     }
     private void translateUp()
     {
-        playerOBJ.transform.Translate(new Vector3(0, 0, 0.85f) * Time.deltaTime * speed);
+        playerOBJ.transform.Translate(new Vector3(0, 0, 0.5f) * Time.deltaTime * speed);
         player.isKinematic = false;
         player.useGravity = true;
     }

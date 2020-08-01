@@ -9,6 +9,7 @@ TagManager:
   - Moveable
   - Ladder
   - LadderExit
+  - Head
   layers:
   - Default
   - TransparentFX
