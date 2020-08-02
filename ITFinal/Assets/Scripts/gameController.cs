@@ -6,21 +6,24 @@ using UnityEngine.SceneManagement;
 
 public class gameController : MonoBehaviour
 {
-    public int maxHealth = 100;
-    public int currentHealth;
+    public static int maxHealth = 100;
+    public static int currentHealth;
     public float maxMana = 100;
     public float currentMana;
     public float manaRecharge;
-
+    public bool locked;
     public manaAmountInd manaAmount;
     public healthAmountInd healthBar;
-
-
+    public static bool enteredSavePoint;
+    public static Vector3 respawn;
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
         currentMana = maxMana;
+        Cursor.lockState = CursorLockMode.Locked;
+        locked = true;
+        enteredSavePoint = false;
     }
 
     // Update is called once per frame
@@ -31,7 +34,11 @@ public class gameController : MonoBehaviour
             TakeDamage(20);
         }
 
-        if(currentHealth == 0)
+        if(currentHealth == 0 && enteredSavePoint == true)
+        {
+            respawnSystem();
+        }
+        else if(currentHealth == 0)
         {
             SceneManager.LoadScene("TestLevel");
         }
@@ -82,7 +89,31 @@ public class gameController : MonoBehaviour
             manaAmount.SetMana(currentMana);
         }
 
-        
+        cursorLock();
 
     }
+
+    private void cursorLock()
+    {
+        if (locked == true && Input.GetKeyDown(KeyCode.Escape))
+        {
+            locked = false;
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
+        }
+        else if (locked == false && Input.GetKeyDown(KeyCode.Escape))
+        {
+            locked = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Time.timeScale = 1;
+        }
+    }
+
+    private void respawnSystem()
+    {
+        {
+            transform.position = respawn;
+        }
+    }
+
 }
