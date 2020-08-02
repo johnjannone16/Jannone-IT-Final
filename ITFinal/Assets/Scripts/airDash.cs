@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class airDash : MonoBehaviour
 {
@@ -13,7 +14,10 @@ public class airDash : MonoBehaviour
     Vector3 m_GroundNormal;
     public static bool m_IsGrounded;
     public float distance;
+    public static bool manaCost;
 
+
+    public gameController mana;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,15 +35,27 @@ public class airDash : MonoBehaviour
 
     private void airDashForward()
     {
-        if(m_IsGrounded == false && Input.GetKey(KeyCode.F) && fireflyChangeMat.abilityNum == 1)
+        if(m_IsGrounded == false && Input.GetKey(KeyCode.F) && fireflyChangeMat.abilityNum == 1 && mana.currentMana >= 20)
         {
             player.transform.Translate(new Vector3(0, 0, 1) * Time.deltaTime * distance);
             anim.SetBool("airDash", true);
+            manaCost = true;
         }
         else
         {
             anim.SetBool("airDash", false);
+            
         }
+        if (m_IsGrounded == false && Input.GetKeyDown(KeyCode.F) && fireflyChangeMat.abilityNum == 1 && mana.currentMana >= 20)
+        {
+            manaCost = true;
+            Debug.Log("using mana");
+        }
+        else
+        {
+            manaCost = false;
+        }
+
     }
 
     void CheckGroundStatus()
@@ -66,5 +82,7 @@ public class airDash : MonoBehaviour
             //anim.applyRootMotion = false;
         }
     }
+
+    
 
 }

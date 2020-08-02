@@ -8,13 +8,16 @@ public class TriggerAnimatorScript : MonoBehaviour
     public Rigidbody player;
     public GameObject playerOBJ;
     public float speed = 1;
-    
+    public static bool manaUse;
+
+    public gameController mana;
     
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
         player = GetComponent<Rigidbody>();
+        manaUse = false;
     }
 
     // Update is called once per frame
@@ -25,13 +28,15 @@ public class TriggerAnimatorScript : MonoBehaviour
     }
     void pushTrigger()
     {
-        if (moveTrigger.inTrigger == true && Input.GetKey(KeyCode.F) == true && fireflyChangeMat.abilityNum == 3)
+        if (moveTrigger.inTrigger == true && Input.GetKey(KeyCode.F) == true && fireflyChangeMat.abilityNum == 3 && mana.currentMana > 1)
         {
             anim.SetBool("isPushing", true);
+            manaUse = true;
         }
         else
         {
             anim.SetBool("isPushing", false);
+            manaUse = false;
         }
     }
 
