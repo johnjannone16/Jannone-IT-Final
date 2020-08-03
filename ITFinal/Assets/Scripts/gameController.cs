@@ -16,6 +16,8 @@ public class gameController : MonoBehaviour
     public healthAmountInd healthBar;
     public static bool enteredSavePoint;
     public static Vector3 respawn;
+    public float manaRate;
+    public float manaDrain;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,7 @@ public class gameController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         locked = true;
         enteredSavePoint = false;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -79,13 +82,13 @@ public class gameController : MonoBehaviour
 
         void useManaPush(float mana)
         {
-            currentMana -= mana;
+            currentMana -= mana * manaDrain * Time.deltaTime;
             manaAmount.SetMana(currentMana);
         }
 
         void regainMana(float mana)
         {
-            currentMana += mana;
+            currentMana += mana * manaRecharge * Time.deltaTime;
             manaAmount.SetMana(currentMana);
         }
 
@@ -100,12 +103,14 @@ public class gameController : MonoBehaviour
             locked = false;
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
+            Cursor.visible = true;
         }
         else if (locked == false && Input.GetKeyDown(KeyCode.Escape))
         {
             locked = true;
             Cursor.lockState = CursorLockMode.Locked;
             Time.timeScale = 1;
+            Cursor.visible = false;
         }
     }
 
