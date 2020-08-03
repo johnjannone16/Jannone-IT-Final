@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class killTrigger : MonoBehaviour
+public class doorOpening : MonoBehaviour
 {
     Renderer rend;
     public Rigidbody rb;
-    public static bool inKillTrigger = false;
+    public static bool inTrigger = false;
 
+    // Start is called before the first frame update
     void Start()
     {
         rend = GetComponent<Renderer>();
         rb = GetComponent<Rigidbody>();
-        inKillTrigger = false;
+        inTrigger = false;
     }
 
     // Update is called once per frame
@@ -23,9 +24,8 @@ public class killTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider rb)
     {
-       
         rend.material.color = Color.red;
-        inKillTrigger = true;
+        inTrigger = true;
         Debug.Log("intrigger");
 
     }
@@ -33,6 +33,7 @@ public class killTrigger : MonoBehaviour
     private void OnTriggerExit(Collider rb)
     {
         rend.material.color = Color.white;
-        inKillTrigger = false;
+        inTrigger = false;
     }
+
 }

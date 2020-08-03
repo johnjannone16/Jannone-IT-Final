@@ -38,7 +38,7 @@ public class gameController : MonoBehaviour
         {
             respawnSystem();
         }
-        else if(currentHealth == 0)
+        else if(currentHealth == 0 && enteredSavePoint == false)
         {
             SceneManager.LoadScene("TestLevel");
         }

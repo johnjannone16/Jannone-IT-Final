@@ -21,7 +21,7 @@ public class doorTrigger : MonoBehaviour
 
     void openDoor()
     {
-        if(RigidBodyEnterScript.inTrigger == true)
+        if(doorOpening.inTrigger == true)
         {
             anim.SetBool("DoorOpen", true);
             Debug.Log("Door Open");
