@@ -5,12 +5,15 @@ using UnityEngine;
 public class fireflyChangeMat : MonoBehaviour
 {
     // Start is called before the first frame update
+    //renderer calls and assigns the rend
+    //public static in this case would localize and allow other scripts to call and synch which ability is active
     Renderer rend;
     public static float abilityNum;
 
 
     void Start()
     {
+        //assings the material and ability at start
         ParticleSystem.MainModule settings = GetComponent<ParticleSystem>().main;
         settings.startColor = new ParticleSystem.MinMaxGradient(Color.white);
         abilityNum = 1;
@@ -22,6 +25,9 @@ public class fireflyChangeMat : MonoBehaviour
         checkKeyPress();
     }
 
+
+    //checkKeyPress checks which and assigns a color to the particle system so if 1 is pressed then white is applied 2 pressed green is applied
+    //i'd recommend setting up an array and assigning the different colors or particle systems to it and cycling through with a count system to allow the use of buttons to cycle
     private void checkKeyPress()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
